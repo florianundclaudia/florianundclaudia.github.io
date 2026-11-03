@@ -9,7 +9,7 @@ Ein rosé Umschlag mit geprägten Blumen und Wachssiegel öffnet sich beim Antip
 
 - **WhatsApp-Nummer, Zusage-Frist, Spotify-Link:** ganz unten in `index.html` bzw. `sk/index.html` im Block `CONFIG` (`whatsapp`, `rsvpBy`, `spotify`).
 - **Texte:** Deutsch in `index.html`, Slowakisch in `sk/index.html`. Änderungen am Inhalt in beiden Dateien machen.
-- **Musik:** `musik.mp3`, eure eigene Aufnahme (Brummen, Rumpeln und Rauschen reduziert, Lautstärke angeglichen, Standortdaten entfernt).
+- **Musik:** `musik.mp3`, eure eigene Aufnahme (tiefes Rumpeln gefiltert, Lautstärke angeglichen, Ende sanft ausgeblendet, Metadaten entfernt).
 - **Vorschaubilder für WhatsApp:** `og.jpg` (Deutsch), `og-sk.jpg` (Slowakisch).
 - **Kalender:** `hochzeit.ics`, `svadba.ics`.
 - **Fotos:** `img/` (Ort: `img/ort-*.jpg`).
