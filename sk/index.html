@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!--pages-only-->
+<base href="../">
+<meta name="description" content="Sobota 26. júna 2027 · Karolinenhof, Hainburg an der Donau. Ťuknite na pečať a otvorte pozvánku.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="sk_SK">
+<meta property="og:title" content="Claudia &amp; Florian sa berú">
+<meta property="og:description" content="Sobota 26. júna 2027 · Karolinenhof, Hainburg an der Donau. Ťuknite na pečať a otvorte pozvánku.">
+<meta property="og:url" content="https://florianundclaudia.github.io/sk/">
+<meta property="og:image" content="https://florianundclaudia.github.io/og-sk.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EFD8CB">
+<link rel="preload" as="image" href="img/seal.webp">
+<link rel="preload" as="image" href="img/relief-top.webp">
+<link rel="preload" as="image" href="img/relief-bottom.webp">
+<link rel="preload" as="image" href="img/relief-vine.webp">
+<link rel="preload" as="image" href="img/relief-vine-r.webp">
+<link rel="preload" as="image" href="img/paper.webp">
+<!--/pages-only-->
+<title>Svadba na Karolinenhofe</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23EADBC6'/%3E%3Ccircle cx='50' cy='50' r='32' fill='none' stroke='%23C8A06A' stroke-width='3'/%3E%3Cpath d='M50 70C38 61 31 55 31 47c0-6 5-10 10-10 4 0 7 2 9 5 2-3 5-5 9-5 5 0 10 4 10 10 0 8-7 14-19 23z' fill='%23C8A06A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=EB+Garamond:ital,wght@0,400..600;1,400..600&family=Pinyon+Script&display=swap">
+<style>
+/* Layout: one letterpress column on handmade paper. It opens out of a blush envelope with blind-embossed flowers. */
+:root {
+  --paper: #F2ECE4;
+  --card: #FBF8F3;
+  --ink: #2A201C;
+  --ink-soft: #6C5E55;
+  --rule: rgba(42, 32, 28, .16);
+  --wax: #8C1C22;
+  --wax-deep: #5A0E13;
+  --sage: #6F7A62;
+  --env: #EFD8CB;
+  --env-ink: #9A7466;
+  --gold: #E9BE6E;
+  --f-script: "Pinyon Script", "Snell Roundhand", "Apple Chancery", cursive;
+  --f-display: "Bodoni Moda", "Bodoni 72", Didot, Georgia, serif;
+  --f-body: "EB Garamond", Garamond, "Times New Roman", Georgia, serif;
+  --tex: url("img/paper.webp");
+  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .33 0 0 0 0 .26 0 0 0 0 .2 0 0 0 .1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  color-scheme: light;
+}
+[hidden] { display: none !important; }
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--noise), var(--paper);
+  color: var(--ink);
+  font: 400 1.125rem/1.6 var(--f-body);
+  -webkit-font-smoothing: antialiased;
+}
+.is-locked, .is-locked body { overflow: hidden; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--wax); outline-offset: 3px; }
+
+/* ---------- Envelope intro ---------- */
+#intro {
+  --seal: clamp(120px, 36vmin, 180px);
+  position: fixed; inset: 0; z-index: 40;
+  display: none; overflow: hidden;
+  background: var(--env);
+  cursor: pointer; touch-action: none; overscroll-behavior: contain;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none; user-select: none;
+}
+.js #intro { display: block; }
+.js #intro:not(.is-ready) .env, .js #intro:not(.is-ready) .intro__hint, .js #intro:not(.is-ready) .intro__guest { visibility: hidden; }
+.intro__loading { position: absolute; left: 50%; top: 52%; display: flex; gap: 7px; transform: translate(-50%, -50%); opacity: 0; animation: fadeIn .4s ease .7s forwards; }
+.intro__loading i { width: 6px; height: 6px; border-radius: 50%; background: var(--env-ink); animation: dot 1.1s ease-in-out infinite; }
+.intro__loading i:nth-child(2) { animation-delay: .15s; }
+.intro__loading i:nth-child(3) { animation-delay: .3s; }
+#intro.is-ready .intro__loading { display: none; }
+@keyframes dot { 0%, 100% { opacity: .25; transform: scale(.8); } 50% { opacity: 1; transform: scale(1); } }
+.env { position: absolute; inset: 0; }
+.env > * { position: absolute; }
+.paper { background: var(--tex) 0 0 / 192px 192px repeat, var(--env); }
+
+.env__back { inset: 0; z-index: 1; background: var(--tex) 0 0 / 192px repeat, linear-gradient(to bottom, #CFA690, #E2BFAB 70%); }
+.env__glow {
+  position: absolute; inset: 0; opacity: 0;
+  background: radial-gradient(ellipse 60vmin 46vmin at 50% 52%, #FFF8E6 0, #FFE2A6 22%, #F4B868 48%, rgba(226, 150, 92, 0) 82%);
+}
+.side { inset: 0; z-index: 2; }
+.side--l { clip-path: polygon(0 0, 50% 52%, 0 100%); background: var(--tex) 0 0 / 192px repeat, linear-gradient(100deg, #EDD3C5, #E5C6B5 90%); }
+.side--r { clip-path: polygon(100% 0, 50% 52%, 100% 100%); background: var(--tex) 0 0 / 192px repeat, linear-gradient(260deg, #EACFC0, #E2C2B1 90%); }
+.bottom-wrap { inset: 0; z-index: 3; filter: drop-shadow(0 -2px 4px rgba(120, 76, 60, .14)); }
+.bottom {
+  position: absolute; left: 0; right: 0; top: 53.5%; bottom: 0;
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+  background: var(--tex) 0 0 / 192px repeat, linear-gradient(to bottom, #F0DACD, #ECD3C5);
+}
+.flap-shadow { left: 0; right: 0; top: 0; height: 52%; z-index: 4; filter: blur(7px); transform: translateY(6px); opacity: .9; }
+.flap-shadow::before { content: ""; position: absolute; inset: 0; clip-path: polygon(0 0, 100% 0, 50% 100%); background: rgba(110, 66, 50, .26); }
+.light { inset: 0; z-index: 5; opacity: 0; mix-blend-mode: screen; pointer-events: none; }
+.rays, .spill { position: absolute; left: 50%; top: 52%; border-radius: 50%; transform: translate(-50%, -50%) scale(.5); }
+.rays {
+  width: 190vmax; height: 190vmax;
+  background: repeating-conic-gradient(from 3deg, rgba(255, 222, 160, 0) 0deg 4deg, rgba(255, 224, 166, .38) 6.5deg, rgba(255, 222, 160, 0) 9deg 13deg);
+  -webkit-mask-image: radial-gradient(circle, #000 0, rgba(0, 0, 0, .5) 8%, rgba(0, 0, 0, 0) 30%);
+  mask-image: radial-gradient(circle, #000 0, rgba(0, 0, 0, .5) 8%, rgba(0, 0, 0, 0) 30%);
+}
+.spill {
+  width: 130vmin; height: 130vmin;
+  background: radial-gradient(circle, rgba(255, 250, 230, 1) 0, rgba(255, 220, 150, .85) 14%, rgba(250, 190, 110, .35) 34%, rgba(250, 190, 110, 0) 62%);
+}
+.flap {
+  left: 0; right: 0; top: 0; height: 52%; z-index: 6;
+  transform-origin: 50% 0; transform: perspective(1600px) rotateX(0deg);
+  will-change: transform;
+}
+.flap__paper { position: absolute; inset: 0; clip-path: polygon(0 0, 100% 0, 50% 100%); background: var(--tex) 0 0 / 192px repeat, linear-gradient(to bottom, #F4E2D7, #EFD9CC 60%, #EAD0C2); }
+.flap__rim { position: absolute; inset: 0; clip-path: polygon(0 0, 100% 0, 50% 100%); opacity: 0; background: radial-gradient(ellipse 50% 40% at 50% 100%, rgba(255, 210, 130, .7), rgba(255, 210, 130, 0) 70%); }
+.env__lighting {
+  inset: 0; z-index: 7; pointer-events: none;
+  background:
+    radial-gradient(ellipse 90% 60% at 22% 8%, rgba(255, 250, 244, .32), rgba(255, 250, 244, 0) 70%),
+    radial-gradient(ellipse 80% 50% at 80% 105%, rgba(120, 72, 52, .12), rgba(120, 72, 52, 0) 70%);
+  box-shadow: inset 0 0 110px rgba(120, 76, 58, .2);
+}
+
+.motif { position: absolute; }
+.motif img { width: 100%; height: 100%; }
+.motif--top { width: min(76vw, 42vh); aspect-ratio: 1000 / 620; left: 50%; top: 12%; transform: translateX(-50%); }
+.motif--bottom { width: min(70vw, 36vh); aspect-ratio: 1000 / 620; left: 50%; bottom: 6%; transform: translateX(-50%); }
+.motif--vine { height: 41%; aspect-ratio: 260 / 1100; top: 29%; left: max(3.5vw, 10px); }
+.side--r .motif--vine { left: auto; right: max(3.5vw, 10px); }
+.gold {
+  position: absolute; inset: 0; opacity: 0; mix-blend-mode: hard-light;
+  background: linear-gradient(105deg, rgba(255, 214, 130, 0) 0%, rgba(255, 214, 130, 0) 34%, rgba(240, 186, 92, .95) 44%, rgba(255, 244, 210, 1) 50%, rgba(236, 178, 84, .95) 56%, rgba(255, 214, 130, 0) 66%, rgba(255, 214, 130, 0) 100%), rgba(236, 190, 110, .35);
+  background-size: 320% 100%, auto; background-position: 110% 0, 0 0;
+  -webkit-mask-size: 100% 100%; mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+}
+.gold--top { -webkit-mask-image: url("img/mask-top.webp"); mask-image: url("img/mask-top.webp"); }
+.gold--bottom { -webkit-mask-image: url("img/mask-bottom.webp"); mask-image: url("img/mask-bottom.webp"); }
+.gold--vine { -webkit-mask-image: url("img/mask-vine.webp"); mask-image: url("img/mask-vine.webp"); }
+.gold--vine-r { -webkit-mask-image: url("img/mask-vine-r.webp"); mask-image: url("img/mask-vine-r.webp"); }
+
+.seal {
+  position: absolute; left: 50%; top: 100%; z-index: 2;
+  width: var(--seal); aspect-ratio: 1;
+  margin: 0; padding: 0; border: 0; background: none; border-radius: 50%;
+  transform: translate(-50%, -50%); cursor: pointer;
+}
+.seal img { width: 100%; height: 100%; animation: breathe 3.2s ease-in-out infinite; }
+.seal__glint {
+  position: absolute; inset: 0; pointer-events: none; mix-blend-mode: soft-light;
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, .95) 50%, rgba(255, 255, 255, 0) 62%) 120% 0 / 300% 100% no-repeat;
+  -webkit-mask: url("img/seal.webp") center / 100% 100% no-repeat; mask: url("img/seal.webp") center / 100% 100% no-repeat;
+  animation: glint 4.8s ease-in-out 1.2s infinite;
+}
+.spark {
+  position: absolute; z-index: 8; left: var(--x); top: var(--y); width: var(--s, 18px); aspect-ratio: 1;
+  transform: translate(-50%, -50%) scale(0); opacity: 0; pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C13 8.5 15.5 11 24 12 15.5 13 13 15.5 12 24 11 15.5 8.5 13 0 12 8.5 11 11 8.5 12 0Z' fill='%23FFF7E2'/%3E%3C/svg%3E") center / contain no-repeat;
+  filter: drop-shadow(0 0 4px rgba(255, 214, 140, .95)) drop-shadow(0 0 10px rgba(255, 200, 120, .6));
+}
+.spark--idle { animation: idle 4.5s ease-in-out 1.5s infinite; }
+@keyframes idle {
+  0%, 70%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0) rotate(0deg); }
+  82% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(40deg); }
+}
+.intro__guest {
+  position: absolute; z-index: 9; left: 0; right: 0; top: calc(52% + var(--seal) * .42 + 30px);
+  display: grid; justify-items: center; gap: .1rem; text-align: center; margin: 0;
+  padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px));
+  color: var(--env-ink);
+}
+.intro__guest small { font: 500 .7rem/1.3 var(--f-display); letter-spacing: .32em; text-transform: uppercase; }
+.intro__guest.is-long span { font-size: clamp(1.45rem, 6.4vmin, 2.1rem); }
+.intro__guest span { font: 400 clamp(1.9rem, 8.5vmin, 2.6rem)/1.1 var(--f-script); color: #7E5A4D; text-shadow: 0 1px 0 rgba(255, 248, 242, .8), 0 -1px 0 rgba(120, 76, 60, .15); }
+.intro__hint {
+  position: absolute; z-index: 9; left: 0; right: 0; margin: 0;
+  top: calc(52% + var(--seal) * .42 + 8px);
+  text-align: center; color: var(--env-ink);
+  font: 500 .68rem/1 var(--f-display); letter-spacing: .28em; text-transform: uppercase;
+  text-shadow: 0 1px 0 rgba(255, 248, 242, .7);
+}
+#bloom {
+  position: fixed; inset: 0; z-index: 45; opacity: 0; pointer-events: none; display: none;
+  background: radial-gradient(circle at 50% 46%, #FFFEF9 0, #FFF6E4 30%, #F9EBDA 62%, #F2ECE4 100%);
+}
+.js #bloom { display: block; }
+
+@keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.025); } }
+@keyframes glint { 0%, 55% { background-position: 120% 0; } 85%, 100% { background-position: -20% 0; } }
+@keyframes twinkle {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0) rotate(0deg); }
+  45% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(40deg); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(0) rotate(90deg); }
+}
+@keyframes press { 0% { transform: scale(1); } 30% { transform: scale(.94); } 100% { transform: scale(1); } }
+@keyframes shimmer {
+  0% { opacity: 0; background-position: 110% 0, 0 0; }
+  18% { opacity: 1; }
+  72% { opacity: 1; }
+  100% { opacity: 0; background-position: -12% 0, 0 0; }
+}
+@keyframes lift { to { transform: perspective(1600px) rotateX(44deg); } }
+@keyframes fadeIn { to { opacity: 1; } }
+@keyframes fadeOut { to { opacity: 0; } }
+@keyframes raysGrow { to { transform: translate(-50%, -50%) scale(1.35) rotate(18deg); } }
+@keyframes spillGrow { to { transform: translate(-50%, -50%) scale(1.6); } }
+@keyframes bloomIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes bloomOut { from { opacity: 1; } to { opacity: 0; } }
+
+.is-opening #intro { cursor: default; }
+.is-opening .seal { pointer-events: none; }
+.is-opening .seal img { animation: press .55s ease both; }
+.is-opening .seal__glint { animation: none; opacity: 0; }
+.is-opening .spark { animation: twinkle 1.15s ease-in-out var(--d, 0s) both; }
+.is-opening .intro__hint, .is-opening .intro__guest { animation: fadeOut .6s ease .2s forwards; }
+.is-opening .gold { animation: shimmer 2s cubic-bezier(.45, .05, .3, 1) var(--gd, 0s) both; }
+.is-opening .flap { animation: lift 2.3s cubic-bezier(.55, .05, .25, 1) 1.8s forwards; }
+.is-opening .flap-shadow { animation: fadeOut .9s ease 1.8s forwards; }
+.is-opening .env__glow { animation: fadeIn 1.8s ease 2.1s forwards; }
+.is-opening .flap__rim { animation: fadeIn 1.4s ease 2.5s forwards; }
+.is-opening .light { animation: fadeIn 1.6s ease 2.4s forwards; }
+.is-opening .rays { animation: raysGrow 2.6s cubic-bezier(.2, .6, .3, 1) 2.3s forwards; }
+.is-opening .spill { animation: spillGrow 2.4s cubic-bezier(.2, .6, .3, 1) 2.3s forwards; }
+.is-blooming #bloom { animation: bloomIn .95s ease forwards; }
+.is-revealed #bloom { animation: bloomOut 1.3s ease forwards; }
+
+/* ---------- Music ---------- */
+.music {
+  position: fixed; z-index: 30;
+  right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  width: 48px; height: 48px; border-radius: 50%;
+  display: grid; place-items: center; padding: 0; cursor: pointer;
+  background: rgba(251, 248, 243, .88); color: var(--wax);
+  border: 1px solid rgba(140, 28, 34, .3);
+  box-shadow: 0 6px 18px rgba(60, 40, 30, .16);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+}
+.music svg { width: 20px; height: 20px; }
+.music .bars rect { transform-origin: 50% 100%; transform-box: fill-box; }
+.music.is-playing .bars rect { animation: eq 1s ease-in-out infinite; }
+.music.is-playing .bars rect:nth-child(2) { animation-delay: -.35s; }
+.music.is-playing .bars rect:nth-child(3) { animation-delay: -.7s; }
+.music:not(.is-playing) .bars { opacity: .45; }
+.music .off { display: none; }
+.music:not(.is-playing) .off { display: block; }
+@keyframes eq { 0%, 100% { transform: scaleY(.35); } 50% { transform: scaleY(1); } }
+
+/* ---------- Invitation ---------- */
+main {
+  max-width: 35rem; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 5rem;
+}
+.js.is-locked main { visibility: hidden; }
+section { padding-block: 3.25rem 0; text-align: center; }
+.sh { display: grid; gap: .55rem; justify-items: center; margin-bottom: 1.75rem; }
+.label, .eyebrow {
+  margin: 0; font: 500 .74rem/1.3 var(--f-display); letter-spacing: .3em; text-transform: uppercase; color: var(--ink-soft);
+}
+h1, h2, h3 { margin: 0; font-weight: 400; text-wrap: balance; }
+h2 { font: italic 400 clamp(2.1rem, 9vw, 2.75rem)/1.08 var(--f-display); letter-spacing: -.01em; }
+p { margin: 0; }
+
+.hero { display: grid; justify-items: center; gap: 1.1rem; padding-top: 3rem; text-align: center; }
+.arch { position: relative; width: min(76vw, 21rem); aspect-ratio: 3 / 4; max-width: 100%; margin: .9rem 0 1.6rem; }
+.arch::before {
+  content: ""; position: absolute; inset: -11px;
+  border: 1px solid rgba(140, 28, 34, .45);
+  border-radius: 50% 50% 6px 6px / 36% 36% 6px 6px;
+}
+.arch > img:first-child {
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%;
+  border-radius: 50% 50% 4px 4px / 37.5% 37.5% 4px 4px;
+  box-shadow: 0 18px 40px rgba(60, 40, 30, .18);
+}
+.arch .mini-seal { position: absolute; left: 50%; bottom: -46px; width: 96px; transform: translateX(-50%); }
+.names { font: 400 clamp(3rem, 14vw, 4.6rem)/1.02 var(--f-script); color: var(--ink); padding-inline: .2em; }
+.amp { color: var(--wax); }
+.date { display: flex; align-items: center; gap: .55em; font: 400 1.6rem/1 var(--f-display); letter-spacing: .1em; font-variant-numeric: lining-nums; }
+.date i { font-style: normal; color: var(--wax); font-size: .8em; }
+.place { font: italic 400 1.15rem/1.4 var(--f-body); color: var(--ink-soft); }
+
+.flourish { display: flex; align-items: center; justify-content: center; gap: .9rem; padding-top: 3.25rem; color: var(--wax); }
+.flourish span { height: 1px; width: 4.5rem; background: var(--rule); }
+.flourish svg { width: 15px; height: 15px; }
+
+.lede { max-width: 31ch; margin-inline: auto; font-size: 1.24rem; line-height: 1.62; }
+.lede em { display: block; margin-bottom: .6rem; font: italic 400 1.3rem var(--f-display); }
+
+.family { margin: 2.6rem auto 0; width: min(84vw, 20rem); padding: 10px 10px 0; background: var(--card); box-shadow: 0 1px 2px rgba(60, 40, 30, .12), 0 16px 36px rgba(60, 40, 30, .16); transform: rotate(-1.6deg); }
+.family img { width: 100%; aspect-ratio: 820 / 1025; object-fit: cover; }
+.family figcaption { padding: .55rem 0 .7rem; font: 400 1.9rem/1.1 var(--f-script); color: var(--ink); }
+
+.countdown {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-block: 1px solid var(--rule); padding-block: 1.2rem; max-width: 26rem; margin-inline: auto;
+}
+.countdown div { display: grid; gap: .35rem; }
+.countdown div + div { border-left: 1px solid var(--rule); }
+.countdown b { font: 400 clamp(1.9rem, 8vw, 2.5rem)/1 var(--f-display); font-variant-numeric: lining-nums tabular-nums; }
+.countdown small { font: 500 .66rem/1 var(--f-display); letter-spacing: .22em; text-transform: uppercase; color: var(--ink-soft); }
+.countdown-done { font: italic 400 1.4rem var(--f-display); }
+
+.tl { --rail-x: 1.4rem; position: relative; max-width: 23rem; margin: 0 auto; text-align: left; }
+.tl__rail { position: absolute; left: var(--rail-x); top: 0; height: 0; width: 2px; margin-left: -1px; background: repeating-linear-gradient(to bottom, rgba(140, 28, 34, .3) 0 5px, rgba(140, 28, 34, 0) 5px 10px); }
+.tl__fill { position: absolute; left: 0; top: 0; width: 100%; height: 0; background: var(--wax); }
+.tl__marker { position: absolute; left: var(--rail-x); top: 0; z-index: 2; width: 58px; transform: translate(-50%, -50%); will-change: transform; pointer-events: none; }
+.tl__end { display: block; width: 18px; height: 18px; margin: .2rem 0 0 calc(var(--rail-x) - 9px); color: rgba(140, 28, 34, .4); transition: color .4s, transform .4s; }
+.tl__end.is-reached { color: var(--wax); transform: scale(1.2); }
+.timeline { list-style: none; padding: 0; margin: 0; }
+.timeline li { position: relative; display: grid; grid-template-columns: 5.2rem minmax(0, 1fr); gap: 1rem; align-items: baseline; padding: 2.1rem 0 2.1rem 3.8rem; }
+.tl__dot { position: absolute; left: var(--rail-x); top: 2.975rem; width: 13px; height: 13px; margin: -6.5px 0 0 -6.5px; border-radius: 50%; background: var(--paper); border: 1.5px solid rgba(140, 28, 34, .5); transition: background-color .35s, border-color .35s, transform .35s; }
+.timeline li.is-reached .tl__dot { background: var(--wax); border-color: var(--wax); transform: scale(1.2); }
+.timeline time { font: 400 1.75rem/1 var(--f-display); font-variant-numeric: lining-nums tabular-nums; color: rgba(140, 28, 34, .45); transition: color .35s; }
+.timeline li.is-reached time { color: var(--wax); }
+.timeline h3 { font: 600 .82rem/1.3 var(--f-display); letter-spacing: .24em; text-transform: uppercase; }
+.timeline p { color: var(--ink-soft); margin-top: .2rem; }
+
+.actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem; margin-top: 1.6rem; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  min-height: 2.9rem; padding: .7rem 1.25rem;
+  border: 1px solid var(--ink); border-radius: 999px; background: transparent; color: var(--ink);
+  font: 500 .78rem/1.2 var(--f-display); letter-spacing: .16em; text-transform: uppercase; text-decoration: none;
+  cursor: pointer; transition: background-color .2s, color .2s, transform .2s;
+}
+.btn:hover { background: var(--ink); color: var(--card); }
+.btn:active { transform: scale(.98); }
+.btn svg { width: 1.05em; height: 1.05em; flex: none; }
+.wax-btn { display: grid; justify-items: center; gap: .1rem; margin: .2rem auto 0; color: var(--wax); text-decoration: none; -webkit-tap-highlight-color: transparent; }
+.wax-btn__seal { position: relative; width: 136px; aspect-ratio: 1; transition: transform .25s cubic-bezier(.3, .7, .3, 1); }
+.wax-btn__seal img { width: 100%; height: 100%; }
+.wax-btn__glint {
+  position: absolute; inset: 0; pointer-events: none; mix-blend-mode: soft-light;
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, .9) 50%, rgba(255, 255, 255, 0) 62%) 120% 0 / 300% 100% no-repeat;
+  -webkit-mask: url("img/seal-wa.webp") center / 100% 100% no-repeat; mask: url("img/seal-wa.webp") center / 100% 100% no-repeat;
+  animation: glint 4.8s ease-in-out 2s infinite;
+}
+.wax-btn__label { font: 600 .76rem/1.3 var(--f-display); letter-spacing: .2em; text-transform: uppercase; text-align: center; }
+.wax-btn:hover .wax-btn__seal { transform: rotate(-5deg) scale(1.03); }
+.wax-btn:active .wax-btn__seal { transform: scale(.93); }
+.wax-btn:focus-visible { outline: none; }
+.wax-btn:focus-visible .wax-btn__label { outline: 2px solid var(--wax); outline-offset: 4px; }
+.venue { display: grid; gap: 10px; margin: 0 0 1.8rem; }
+.venue__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.ph { display: block; margin: 0; padding: 5px; border: 0; background: var(--card); cursor: zoom-in; box-shadow: 0 1px 2px rgba(60, 40, 30, .1), 0 8px 20px rgba(60, 40, 30, .1); }
+.ph img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.venue > .ph img { aspect-ratio: 1179 / 763; }
+.song { display: grid; justify-items: center; gap: .4rem; }
+.song__meta { font-style: italic; color: var(--ink-soft); }
+.btn--spotify svg { width: 1.25em; height: 1.25em; }
+.small-print { margin-top: .9rem; font-size: .98rem; color: var(--ink-soft); }
+
+.addr { font: 400 1.3rem/1.5 var(--f-body); }
+.addr + p { margin-top: .6rem; color: var(--ink-soft); font-style: italic; }
+
+.strip {
+  display: flex; gap: 1.1rem; overflow-x: auto; scroll-snap-type: x mandatory;
+  margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))) calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+  padding: .8rem max(16px, env(safe-area-inset-right, 0px)) 1.6rem max(16px, env(safe-area-inset-left, 0px));
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.strip::-webkit-scrollbar { display: none; }
+.polaroid {
+  flex: none; scroll-snap-align: center;
+  margin: 0; padding: 8px 8px 30px; border: 0; cursor: zoom-in;
+  background: var(--card); box-shadow: 0 1px 2px rgba(60, 40, 30, .12), 0 10px 24px rgba(60, 40, 30, .14);
+  transform: rotate(var(--tilt, -1.5deg));
+}
+.polaroid:nth-child(2n) { --tilt: 1.6deg; }
+.polaroid:nth-child(3n) { --tilt: -.6deg; }
+.polaroid img { height: 15.5rem; width: auto; max-width: none; }
+.swipe { font: 500 .7rem/1 var(--f-display); letter-spacing: .26em; text-transform: uppercase; color: var(--ink-soft); }
+
+.card {
+  text-align: left; display: grid; gap: 1.15rem;
+  padding: 1.5rem clamp(1rem, 5vw, 1.75rem) 1.6rem;
+  background: var(--noise), var(--card);
+  border: 1px solid var(--rule);
+  box-shadow: 0 14px 40px rgba(60, 40, 30, .09);
+}
+.field { display: grid; gap: .45rem; min-width: 0; }
+.field > label, fieldset legend {
+  font: 600 .74rem/1.3 var(--f-display); letter-spacing: .2em; text-transform: uppercase; color: var(--ink);
+}
+.field > label span { font-weight: 400; letter-spacing: .1em; text-transform: none; color: var(--ink-soft); font-family: var(--f-body); font-size: .95rem; }
+input[type="text"], input[type="number"], textarea {
+  width: 100%; min-width: 0;
+  padding: .7rem .85rem; border: 1px solid rgba(42, 32, 28, .28); border-radius: 4px;
+  background: #FFFDF9; color: var(--ink);
+  font: 400 1.12rem/1.4 var(--f-body);
+}
+textarea { resize: vertical; }
+input:focus, textarea:focus { outline: 2px solid var(--wax); outline-offset: 1px; border-color: transparent; }
+fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: .55rem; min-width: 0; }
+fieldset legend { padding: 0; margin-bottom: .45rem; }
+.choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; }
+.choice { position: relative; }
+.choice input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.choice span {
+  display: flex; align-items: center; justify-content: center; min-height: 3rem; padding: .5rem;
+  border: 1px solid rgba(42, 32, 28, .28); border-radius: 4px; background: #FFFDF9;
+  font: 400 1.08rem/1.2 var(--f-body); text-align: center;
+  transition: background-color .2s, color .2s, border-color .2s;
+}
+.choice input:checked + span { background: var(--ink); border-color: var(--ink); color: var(--card); }
+.choice input:focus-visible + span { outline: 2px solid var(--wax); outline-offset: 2px; }
+.stepper { display: grid; grid-template-columns: 3rem minmax(0, 6rem) 3rem; gap: .5rem; align-items: stretch; }
+.stepper button {
+  border: 1px solid rgba(42, 32, 28, .28); border-radius: 4px; background: #FFFDF9; color: var(--ink);
+  font: 400 1.4rem/1 var(--f-display); cursor: pointer;
+}
+.stepper input { text-align: center; -moz-appearance: textfield; appearance: textfield; }
+.stepper input::-webkit-inner-spin-button, .stepper input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.error { color: var(--wax); font-style: italic; }
+.done { padding: .8rem 1rem; border-left: 2px solid var(--sage); background: rgba(111, 122, 98, .1); }
+details.copy { border-top: 1px solid var(--rule); padding-top: .9rem; }
+details.copy summary { cursor: pointer; color: var(--ink-soft); font-style: italic; }
+details.copy pre {
+  margin: .8rem 0; padding: .8rem; white-space: pre-wrap; overflow-wrap: anywhere;
+  background: rgba(42, 32, 28, .05); border-radius: 4px; font: 400 1rem/1.5 var(--f-body);
+}
+.copy .btn { width: 100%; }
+
+.end { display: grid; justify-items: center; gap: .7rem; padding-top: 4rem; text-align: center; }
+.end .mini-seal { width: 84px; }
+.end .script { font: 400 clamp(2.3rem, 10vw, 3rem)/1.1 var(--f-script); }
+.end .label { margin-top: .2rem; }
+.replay { margin-top: 1.4rem; border: 0; background: none; padding: .4rem; color: var(--ink-soft); font: italic 400 1rem var(--f-body); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
+dialog#lightbox {
+  border: 0; padding: 0; background: transparent; max-width: 100vw; max-height: 100vh; width: 100vw; height: 100vh;
+  margin: 0; display: none; place-items: center; cursor: zoom-out;
+}
+dialog#lightbox[open] { display: grid; }
+dialog#lightbox::backdrop { background: rgba(30, 22, 18, .9); }
+dialog#lightbox img { max-width: 94vw; max-height: 86vh; width: auto; height: auto; box-shadow: 0 20px 60px rgba(0, 0, 0, .4); }
+
+@keyframes up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.is-revealed .hero > * { animation: up 1.1s cubic-bezier(.2, .7, .2, 1) both; }
+.is-revealed .hero > :nth-child(2) { animation-delay: .15s; }
+.is-revealed .hero > :nth-child(3) { animation-delay: .35s; }
+.is-revealed .hero > :nth-child(4) { animation-delay: .5s; }
+.is-revealed .hero > :nth-child(5) { animation-delay: .62s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add("js", "is-locked");</script>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="heart" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12 21C6 16.4 2.5 13.2 2.5 9.1 2.5 6.3 4.7 4 7.4 4c1.9 0 3.6 1 4.6 2.6C13 5 14.7 4 16.6 4c2.7 0 4.9 2.3 4.9 5.1 0 4.1-3.5 7.3-9.5 11.9z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div id="intro" role="dialog" aria-label="Obálka s pozvánkou">
+  <div class="env">
+    <div class="env__back"><div class="env__glow"></div></div>
+    <div class="side side--l">
+      <div class="motif motif--vine"><img src="img/relief-vine.webp" alt=""><span class="gold gold--vine" style="--gd:.35s"></span></div>
+    </div>
+    <div class="side side--r">
+      <div class="motif motif--vine"><img src="img/relief-vine-r.webp" alt=""><span class="gold gold--vine-r" style="--gd:.35s"></span></div>
+    </div>
+    <div class="bottom-wrap">
+      <div class="bottom">
+        <div class="motif motif--bottom"><img src="img/relief-bottom.webp" alt=""><span class="gold gold--bottom" style="--gd:.6s"></span></div>
+      </div>
+    </div>
+    <div class="flap-shadow"></div>
+    <div class="light"><div class="spill"></div><div class="rays"></div></div>
+    <div class="flap">
+      <div class="flap__paper">
+        <div class="motif motif--top"><img src="img/relief-top.webp" alt=""><span class="gold gold--top" style="--gd:.05s"></span></div>
+      </div>
+      <div class="flap__rim"></div>
+      <button class="seal" id="seal" type="button" aria-label="Ťuknite na pečať a otvorte pozvánku">
+        <img src="img/seal.webp" width="640" height="640" alt="">
+        <span class="seal__glint"></span>
+      </button>
+    </div>
+    <div class="env__lighting"></div>
+    <i class="spark" style="--x:30%;--y:13%;--d:.15s"></i>
+    <i class="spark" style="--x:68%;--y:9%;--d:.4s;--s:14px"></i>
+    <i class="spark" style="--x:50%;--y:25%;--d:.6s;--s:22px"></i>
+    <i class="spark" style="--x:9%;--y:40%;--d:.5s;--s:14px"></i>
+    <i class="spark" style="--x:91%;--y:56%;--d:.8s"></i>
+    <i class="spark" style="--x:62%;--y:47%;--d:.3s;--s:16px"></i>
+    <i class="spark" style="--x:36%;--y:83%;--d:.95s"></i>
+    <i class="spark" style="--x:64%;--y:89%;--d:1.2s;--s:14px"></i>
+    <i class="spark" style="--x:50%;--y:76%;--d:1.05s;--s:20px"></i>
+    <i class="spark spark--idle" style="--x:84%;--y:91%;--s:16px"></i>
+  </div>
+  <p class="intro__hint">Ťuknite na pečať</p>
+  <div class="intro__loading" aria-hidden="true"><i></i><i></i><i></i></div>
+</div>
+<div id="bloom" aria-hidden="true"></div>
+
+<button class="music" id="music-btn" type="button" aria-label="Pozastaviť hudbu" hidden>
+  <svg class="bars" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="3" height="14" rx="1.5" fill="currentColor"/><rect x="10.5" y="5" width="3" height="14" rx="1.5" fill="currentColor"/><rect x="17" y="5" width="3" height="14" rx="1.5" fill="currentColor"/></svg>
+  <svg class="off" viewBox="0 0 24 24" aria-hidden="true" style="position:absolute"><path d="M4 20 20 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+</button>
+<audio id="music" src="musik.mp3" preload="auto" loop playsinline></audio>
+
+<main id="top" tabindex="-1">
+  <header class="hero">
+    <p class="eyebrow">Berieme sa</p>
+    <figure class="arch">
+      <img src="img/hero.jpg" width="900" height="1200" alt="Claudia a Florian na čiernej pláži na Santorini">
+      <img class="mini-seal" src="img/seal-small.webp" width="320" height="320" alt="">
+    </figure>
+    <h1 class="names">Claudia <span class="amp">&amp;</span> Florian</h1>
+    <p class="date" aria-label="26. júna 2027"><span>26</span><i>·</i><span>06</span><i>·</i><span>2027</span></p>
+    <p class="place">Karolinenhof · Hainburg an der Donau</p>
+  </header>
+
+  <div class="flourish" aria-hidden="true"><span></span><svg><use href="#heart"/></svg><span></span></div>
+
+  <section class="greeting" style="padding-top:2rem">
+    <p class="lede"><em>Milá rodina, milí priatelia,</em>spolu sme už zažili veľa krásnych chvíľ a s našou dcérkou Annou sme sa stali malou rodinou. Teraz si povieme áno! Z celého srdca by nás potešilo, keby ste tento deň oslávili s nami.</p>
+    <figure class="family">
+      <img src="img/familie.jpg" width="820" height="1025" alt="Claudia a Florian s dcérkou Annou v záhrade">
+      <figcaption>Claudia, Anna &amp; Florian</figcaption>
+    </figure>
+  </section>
+
+  <section id="countdown-section">
+    <header class="sh"><p class="label">Do nášho veľkého dňa</p></header>
+    <div class="countdown" id="countdown" role="timer">
+      <div><b id="cd-d">235</b><small id="cd-dl">dní</small></div>
+      <div><b id="cd-h">00</b><small id="cd-hl">hodín</small></div>
+      <div><b id="cd-m">00</b><small id="cd-ml">minút</small></div>
+      <div><b id="cd-s">00</b><small id="cd-sl">sekúnd</small></div>
+    </div>
+    <p class="countdown-done" id="countdown-done" hidden>Dnes je náš veľký deň!</p>
+  </section>
+
+  <section id="ablauf">
+    <header class="sh"><p class="label">Sobota 26. júna 2027</p><h2>Program</h2></header>
+    <div class="tl" id="timeline">
+      <div class="tl__rail" aria-hidden="true"><span class="tl__fill"></span></div>
+      <img class="tl__marker" src="img/seal-rings.webp" width="320" height="320" alt="" aria-hidden="true">
+      <ol class="timeline">
+        <li><span class="tl__dot" aria-hidden="true"></span><time datetime="2027-06-26T12:30">12:30</time><div><h3>Stretnutie</h3><p>Stretneme sa na Karolinenhofe.</p></div></li>
+        <li><span class="tl__dot" aria-hidden="true"></span><time datetime="2027-06-26T13:00">13:00</time><div><h3>Sobáš</h3><p>Povieme si áno.</p></div></li>
+      </ol>
+      <svg class="tl__end" aria-hidden="true"><use href="#heart"/></svg>
+    </div>
+    <div class="actions">
+      <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Svadba%20Claudie%20a%20Floriana&amp;dates=20270626T123000/20270626T235900&amp;ctz=Europe/Vienna&amp;location=Karolinenhof%2C%20Pressburger%20Reichsstra%C3%9Fe%20600%2C%202410%20Hainburg%20an%20der%20Donau&amp;details=Stretnutie%2012%3A30%2C%20sob%C3%A1%C5%A1%2013%3A00" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M4 6.5h16v13H4zM4 10.5h16M8 4v4M16 4v4"/></svg>Google Kalendár</a>
+      <!--pages-only--><a class="btn" href="svadba.ics"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M4 6.5h16v13H4zM4 10.5h16M8 4v4M16 4v4"/></svg>Apple a Outlook</a><!--/pages-only-->
+    </div>
+  </section>
+
+  <section id="ort">
+    <header class="sh"><p class="label">Miesto</p><h2>Karolinenhof</h2></header>
+    <div class="venue">
+      <button class="ph" type="button" data-full="img/ort-pavillon.jpg"><img src="img/ort-pavillon.jpg" width="1179" height="763" alt="Altánok v záhrade Karolinenhofu s levanduľovým chodníkom" loading="lazy"></button>
+      <div class="venue__grid">
+        <button class="ph" type="button" data-full="img/ort-villa.jpg"><img src="img/ort-villa.jpg" width="1179" height="558" alt="Vila a záhrada Karolinenhofu" loading="lazy"></button>
+        <button class="ph" type="button" data-full="img/ort-scheune-3.jpg"><img src="img/ort-scheune-3.jpg" width="1179" height="612" alt="Slávnostne prestretá stodola" loading="lazy"></button>
+        <button class="ph" type="button" data-full="img/ort-scheune-1.jpg"><img src="img/ort-scheune-1.jpg" width="1179" height="606" alt="Drevené trámy a svetielka v stodole" loading="lazy"></button>
+        <button class="ph" type="button" data-full="img/ort-scheune-2.jpg"><img src="img/ort-scheune-2.jpg" width="1179" height="597" alt="Prestreté stoly v stodole" loading="lazy"></button>
+      </div>
+    </div>
+    <p class="addr">Pressburger Reichsstraße 600<br>2410 Hainburg an der Donau</p>
+    <p>Statok so záhradou, altánkom a starou stodolou uprostred polí pri Hainburgu.</p>
+    <div class="actions">
+      <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Karolinenhof%2C%20Pressburger%20Reichsstra%C3%9Fe%20600%2C%202410%20Hainburg%20an%20der%20Donau" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>Google Maps</a>
+      <a class="btn" href="https://maps.apple.com/?q=Karolinenhof&amp;address=Pressburger%20Reichsstra%C3%9Fe%20600%2C%202410%20Hainburg%20an%20der%20Donau" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>Apple Mapy</a>
+    </div>
+  </section>
+
+  <section id="momente">
+    <header class="sh"><p class="label">Palermo, Santorini a ďalšie</p><h2>Naše chvíle</h2></header>
+    <div class="strip" role="list" aria-label="Fotky, posúvajte do strán">
+      <button class="polaroid" role="listitem" type="button" data-full="img/moment-1.jpg"><img src="img/moment-1.jpg" width="1100" height="825" alt="Selfie medzi bugenvileami pri pláži"></button>
+      <button class="polaroid" role="listitem" type="button" data-full="img/moment-2.jpg"><img src="img/moment-2.jpg" width="1100" height="825" alt="Bozk pred Teatro Massimo v Palerme"></button>
+      <button class="polaroid" role="listitem" type="button" data-full="img/moment-3.jpg"><img src="img/moment-3.jpg" width="825" height="1100" alt="Pred kvitnúcou bugenvileou na Santorini" loading="lazy"></button>
+      <button class="polaroid" role="listitem" type="button" data-full="img/moment-4.jpg"><img src="img/moment-4.jpg" width="1100" height="825" alt="Pri mori pri západe slnka" loading="lazy"></button>
+      <button class="polaroid" role="listitem" type="button" data-full="img/moment-5.jpg"><img src="img/moment-5.jpg" width="825" height="1100" alt="Objatie v kroji na zábave pod stanom" loading="lazy"></button>
+      <button class="polaroid" role="listitem" type="button" data-full="img/moment-6.jpg"><img src="img/moment-6.jpg" width="1100" height="825" alt="Selfie v uličkách Palerma" loading="lazy"></button>
+      <button class="polaroid" role="listitem" type="button" data-full="img/moment-7.jpg"><img src="img/moment-7.jpg" width="619" height="1100" alt="S krstnou sviečkou v kostole" loading="lazy"></button>
+      <button class="polaroid" role="listitem" type="button" data-full="img/moment-8.jpg"><img src="img/moment-8.jpg" width="1100" height="825" alt="Selfie na čiernej pláži" loading="lazy"></button>
+    </div>
+    <p class="swipe" aria-hidden="true">← Posuňte →</p>
+  </section>
+
+  <section id="lied">
+    <header class="sh"><p class="label">Naša pieseň</p><h2>Spring 1</h2></header>
+    <div class="song">
+      <p class="song__meta">Max Richter podľa Vivaldiho, zo seriálu Bridgerton</p>
+      <div class="actions" style="margin-top:.6rem">
+        <a class="btn btn--spotify" id="spotify-link" href="https://open.spotify.com/search/Spring%201%20Max%20Richter" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M7 9.2c3.5-1 7.3-.7 10.2.9M7.6 12.3c2.9-.8 6-.5 8.4.8M8.2 15.2c2.3-.6 4.6-.4 6.6.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Vypočuť na Spotify</a>
+      </div>
+      <p class="small-print">Hudba pri otvorení pozvánky je naša vlastná nahrávka.</p>
+    </div>
+  </section>
+
+  <section id="zusage">
+    <header class="sh"><p class="label">Potvrdenie účasti</p><h2>Budete s nami?</h2></header>
+    <p class="small-print" id="rsvp-by" style="margin:-.6rem 0 1.4rem">Prosím, dajte nám čoskoro vedieť.</p>
+    <form class="card" id="rsvp" novalidate>
+      <div class="field">
+        <label for="rsvp-name">Meno</label>
+        <input type="text" id="rsvp-name" name="name" autocomplete="name" placeholder="napr. Anna a Max Novákovci" required>
+        <p class="error" id="rsvp-error" hidden>Prosím, zadajte sem svoje meno.</p>
+      </div>
+      <fieldset>
+        <legend>Prídete?</legend>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="attend" id="rsvp-yes" value="ja" checked><span>Áno, prídeme</span></label>
+          <label class="choice"><input type="radio" name="attend" id="rsvp-no" value="nein"><span>Žiaľ, nie</span></label>
+        </div>
+      </fieldset>
+      <div class="field" id="count-field">
+        <label for="rsvp-count">Koľko osôb?</label>
+        <div class="stepper">
+          <button type="button" data-step="-1" aria-label="O jednu osobu menej">−</button>
+          <input type="number" id="rsvp-count" name="count" inputmode="numeric" min="1" max="20" value="2">
+          <button type="button" data-step="1" aria-label="O jednu osobu viac">+</button>
+        </div>
+      </div>
+      <div class="field">
+        <label for="rsvp-note">Poznámky <span>(nepovinné)</span></label>
+        <textarea id="rsvp-note" name="note" rows="3" placeholder="napr. vegetariánske jedlo, alergie"></textarea>
+      </div>
+      <a class="wax-btn" id="rsvp-send" href="https://wa.me/436604444471" target="_blank" rel="noopener">
+        <span class="wax-btn__seal"><img src="img/seal-wa.webp" width="480" height="480" alt=""><span class="wax-btn__glint"></span></span>
+        <span class="wax-btn__label">Odpovedať cez WhatsApp</span>
+      </a>
+      <p class="small-print" style="margin:0;text-align:center">Otvorí sa WhatsApp s hotovou správou pre Claudiu a Floriana. Stačí už len ťuknúť na Odoslať.</p>
+      <p class="done" id="rsvp-done" hidden>Ďakujeme! Ak sa WhatsApp neotvoril, skopírujte text nižšie a pošlite nám ho na +43 660 4444471.</p>
+      <details class="copy" id="rsvp-copy-box">
+        <summary>Nemáte WhatsApp? Zobraziť a skopírovať text</summary>
+        <pre id="rsvp-preview"></pre>
+        <button class="btn" type="button" id="rsvp-copy">Skopírovať text</button>
+      </details>
+    </form>
+  </section>
+
+  <footer class="end">
+    <img class="mini-seal" src="img/seal-small.webp" width="320" height="320" alt="">
+    <p class="script">Tešíme sa na vás!</p>
+    <p class="label">Claudia &amp; Florian · 26. júna 2027</p>
+    <button class="replay" type="button" id="replay">Otvoriť obálku ešte raz</button>
+  </footer>
+</main>
+
+<dialog id="lightbox" aria-label="Zväčšená fotka"><img id="lightbox-img" alt=""></dialog>
+
+<script>
+(() => {
+  // ===== Hier anpassen =====
+  const CONFIG = {
+    whatsapp: "436604444471", // Nummer für Zusagen (mit Ländervorwahl, ohne + und Leerzeichen)
+    rsvpBy: "",               // Zusage bis, slowakisch, z. B. "1. marca 2027"
+    spotify: "",              // Link zu „Spring 1“ auf Spotify (Teilen → Link kopieren); leer = Spotify-Suche
+    ceremony: Date.UTC(2027, 5, 26, 11, 0, 0) // Trauung 13:00 Uhr in Wien (Sommerzeit = UTC+2)
+  };
+
+  const $ = (s) => document.querySelector(s);
+  const root = document.documentElement;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+
+  // Musik
+  const audio = $("#music"), musicBtn = $("#music-btn");
+  function syncMusic() {
+    const on = !audio.paused;
+    musicBtn.classList.toggle("is-playing", on);
+    musicBtn.setAttribute("aria-label", on ? "Pozastaviť hudbu" : "Prehrať hudbu");
+  }
+  audio.addEventListener("play", syncMusic);
+  audio.addEventListener("pause", syncMusic);
+  function startMusic() {
+    try {
+      const p = audio.play();
+      if (p && p.catch) p.catch(syncMusic);
+    } catch (e) {}
+  }
+  musicBtn.addEventListener("click", () => { if (audio.paused) startMusic(); else audio.pause(); });
+
+  // Umschlag öffnen
+  const intro = $("#intro");
+  let opening = false, ready = false;
+  function markReady() { if (!ready) { ready = true; intro.classList.add("is-ready"); } }
+  Promise.all(["img/paper.webp", "img/relief-top.webp", "img/relief-bottom.webp", "img/relief-vine.webp", "img/relief-vine-r.webp", "img/seal.webp"]
+    .map((src) => new Promise((done) => {
+      const im = new Image();
+      im.onload = () => (im.decode ? im.decode().catch(() => {}) : Promise.resolve()).then(done);
+      im.onerror = done;
+      im.src = src;
+    }))).then(markReady);
+  setTimeout(markReady, 6000);
+  function openInvite() {
+    if (opening || !ready) return;
+    opening = true;
+    startMusic();
+    root.classList.add("is-opening");
+    setTimeout(() => root.classList.add("is-blooming"), reduce ? 0 : 3750);
+    setTimeout(() => {
+      intro.hidden = true;
+      root.classList.remove("is-locked");
+      root.classList.add("is-revealed");
+      layoutTl();
+      musicBtn.hidden = false;
+      syncMusic();
+      $("#top").focus({ preventScroll: true });
+    }, reduce ? 250 : 4750);
+  }
+  intro.addEventListener("click", openInvite);
+  $("#replay").addEventListener("click", () => {
+    root.classList.remove("is-opening", "is-blooming", "is-revealed");
+    root.classList.add("is-locked");
+    intro.hidden = false;
+    void intro.offsetWidth;
+    opening = false;
+    window.scrollTo(0, 0);
+    $("#seal").focus({ preventScroll: true });
+  });
+
+  // Ablauf: Siegel läuft beim Scrollen die Linie entlang
+  const tl = $("#timeline"), rail = tl.querySelector(".tl__rail"), fill = tl.querySelector(".tl__fill");
+  const marker = tl.querySelector(".tl__marker"), endMark = tl.querySelector(".tl__end");
+  const items = [...tl.querySelectorAll(".timeline li")];
+  let railTop = 0, railLen = 1, stops = [], ticking = false;
+  const midY = (el) => { const r = el.getBoundingClientRect(), t = tl.getBoundingClientRect(); return r.top - t.top + r.height / 2; };
+  function layoutTl() {
+    const dots = items.map((li) => midY(li.querySelector(".tl__dot")));
+    railTop = dots[0];
+    railLen = Math.max(1, midY(endMark) - railTop);
+    stops = dots.map((d) => (d - railTop) / railLen);
+    rail.style.top = railTop + "px";
+    rail.style.height = railLen + "px";
+    moveTl();
+  }
+  function moveTl() {
+    ticking = false;
+    const top = tl.getBoundingClientRect().top + railTop;
+    const p = Math.min(1, Math.max(0, (window.innerHeight * 0.55 - top) / railLen));
+    marker.style.transform = "translate(-50%, -50%) translateY(" + (railTop + p * railLen).toFixed(1) + "px)";
+    fill.style.height = (p * 100).toFixed(2) + "%";
+    items.forEach((li, i) => li.classList.toggle("is-reached", p >= stops[i] - 0.002));
+    endMark.classList.toggle("is-reached", p >= 0.998);
+  }
+  window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(moveTl); } }, { passive: true });
+  window.addEventListener("resize", layoutTl);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutTl);
+  layoutTl();
+
+  // Countdown
+  const pad = (n) => String(n).padStart(2, "0");
+  const word = (n, one, few, many) => (n === 1 ? one : n >= 2 && n <= 4 ? few : many);
+  function tick() {
+    const diff = CONFIG.ceremony - Date.now();
+    if (diff <= 0) {
+      $("#countdown").hidden = true;
+      const done = $("#countdown-done");
+      if (diff < -20 * 3600 * 1000) done.textContent = "Povedali sme si áno. Ďakujeme, že ste boli pri tom!";
+      done.hidden = false;
+      return false;
+    }
+    const s = Math.floor(diff / 1000);
+    const d = Math.floor(s / 86400), h = Math.floor((s % 86400) / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
+    $("#cd-d").textContent = d;
+    $("#cd-h").textContent = pad(h);
+    $("#cd-m").textContent = pad(m);
+    $("#cd-s").textContent = pad(sec);
+    $("#cd-dl").textContent = word(d, "deň", "dni", "dní");
+    $("#cd-hl").textContent = word(h, "hodina", "hodiny", "hodín");
+    $("#cd-ml").textContent = word(m, "minúta", "minúty", "minút");
+    $("#cd-sl").textContent = word(sec, "sekunda", "sekundy", "sekúnd");
+    return true;
+  }
+  if (tick()) setInterval(tick, 1000);
+
+  // Zusage
+  if (CONFIG.rsvpBy) $("#rsvp-by").textContent = "Prosím, dajte nám vedieť do " + CONFIG.rsvpBy + ".";
+  const nameEl = $("#rsvp-name"), countEl = $("#rsvp-count"), noteEl = $("#rsvp-note");
+  const yesEl = $("#rsvp-yes"), send = $("#rsvp-send");
+  const clampCount = () => Math.min(20, Math.max(1, parseInt(countEl.value, 10) || 1));
+  function message() {
+    const name = nameEl.value.trim() || "…";
+    const yes = yesEl.checked;
+    const n = clampCount();
+    const lines = yes
+      ? ["Ahoj Claudia a Florian! 💍", "Potvrdenie účasti na vašej svadbe 26. 6. 2027:", "✅ Prídeme: " + n + " " + word(n, "osoba", "osoby", "osôb"), "Meno: " + name]
+      : ["Ahoj Claudia a Florian!", "Odpoveď na pozvanie na vašu svadbu 26. 6. 2027:", "❌ Žiaľ, nemôžeme prísť.", "Meno: " + name];
+    const note = noteEl.value.trim();
+    if (note) lines.push("Poznámka: " + note);
+    return lines.join("\n");
+  }
+  function update() {
+    $("#count-field").hidden = !yesEl.checked;
+    const text = message();
+    const num = CONFIG.whatsapp.replace(/\D/g, "");
+    send.href = "https://wa.me/" + num + "?text=" + encodeURIComponent(text);
+    $("#rsvp-preview").textContent = text;
+    if (nameEl.value.trim()) $("#rsvp-error").hidden = true;
+  }
+  $("#rsvp").addEventListener("input", update);
+  $("#rsvp").addEventListener("change", update);
+  $("#rsvp").addEventListener("submit", (e) => e.preventDefault());
+  document.querySelectorAll("[data-step]").forEach((b) => b.addEventListener("click", () => {
+    countEl.value = Math.min(20, Math.max(1, clampCount() + Number(b.dataset.step)));
+    update();
+  }));
+  send.addEventListener("click", (e) => {
+    if (!nameEl.value.trim()) {
+      e.preventDefault();
+      $("#rsvp-error").hidden = false;
+      nameEl.focus();
+      return;
+    }
+    update();
+    setTimeout(() => { $("#rsvp-done").hidden = false; }, 600);
+  });
+  $("#rsvp-copy").addEventListener("click", () => {
+    const btn = $("#rsvp-copy");
+    const fallback = () => {
+      const r = document.createRange();
+      r.selectNodeContents($("#rsvp-preview"));
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(r);
+      btn.textContent = "Text je označený, teraz ho skopírujte";
+    };
+    try {
+      navigator.clipboard.writeText(message()).then(() => { btn.textContent = "Skopírované"; }, fallback);
+    } catch (e) { fallback(); }
+  });
+  update();
+
+  // Fotos groß ansehen
+  const lb = $("#lightbox"), lbImg = $("#lightbox-img");
+  if (CONFIG.spotify) $("#spotify-link").href = CONFIG.spotify;
+  document.querySelectorAll("[data-full]").forEach((b) => b.addEventListener("click", () => {
+    lbImg.src = b.dataset.full;
+    lbImg.alt = b.querySelector("img").alt;
+    if (typeof lb.showModal === "function") lb.showModal(); else lb.setAttribute("open", "");
+  }));
+  lb.addEventListener("click", () => { if (lb.close) lb.close(); else lb.removeAttribute("open"); });
+})();
+</script>
+</body>
+</html>
