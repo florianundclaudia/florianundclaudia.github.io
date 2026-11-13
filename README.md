@@ -13,3 +13,10 @@ Ein rosé Umschlag mit geprägten Blumen und Wachssiegel öffnet sich beim Antip
 - **Vorschaubilder für WhatsApp:** `og.jpg` (Deutsch), `og-sk.jpg` (Slowakisch).
 - **Kalender:** `hochzeit.ics`, `svadba.ics`.
 - **Fotos:** `img/` (Ort: `img/ort-*.jpg`).
+
+## Hausplanung
+
+- Doppelhaus, Bauplan und 3D-Rundgang: https://florianundclaudia.github.io/doppelhaus/
+- Direkt in den Rundgang: https://florianundclaudia.github.io/doppelhaus/#rundgang
+
+Liegt im Ordner `doppelhaus/` und hat mit der Einladung nichts zu tun.
