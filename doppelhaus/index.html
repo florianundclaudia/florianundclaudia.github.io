@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Doppelhaus 150 m² Bauplan 3D</title>
 <meta property="og:title" content="Doppelhaus: Bauplan und 3D-Rundgang">
-<meta property="og:description" content="Zwei Doppelhaushälften mit je 150 m², Pool und Sauna. Zum Durchgehen am Handy oder Computer.">
+<meta property="og:description" content="Zwei Doppelhaushälften mit 140 oder 150 m², Pool und Sauna. Zum Durchgehen am Handy oder Computer.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://florianundclaudia.github.io/doppelhaus/og.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,6 +55,7 @@ button{font:inherit;color:inherit}
 .seg button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
 .seg button[aria-pressed="true"] small{color:var(--on-accent);opacity:.85}
 .seg.sm button{padding:6px 12px;font-size:14px}
+.seg button[data-size]{justify-content:center;font-size:15px;padding:6px 14px}
 .tabs{display:flex;gap:4px}
 .tabs a{font-family:var(--font-display);font-weight:600;font-size:16px;text-decoration:none;color:var(--muted);padding:7px 12px;border-bottom:3px solid transparent}
 .tabs a[aria-current]{color:var(--ink);border-bottom-color:var(--accent)}
@@ -164,6 +165,9 @@ body.touch.walking.looked #lookhint{display:none}
 .card p{margin:0;color:var(--muted)}
 @media (max-width:640px){
   .brand{flex-basis:100%}
+  .bar{gap:8px 10px}
+  .seg button{padding:6px 10px}
+  .seg button[data-size]{padding:6px 10px}
   .intro h1{font-size:28px}
   .hud-where{font-size:13.5px;top:auto;bottom:70px}
   .jump-toggle{display:block}
@@ -179,7 +183,11 @@ body.touch.walking.looked #lookhint{display:none}
 </head>
 <body>
 <header class="bar">
-  <div class="brand"><strong>Doppelhaus · Version 2</strong><span>150 m² mit Gästezimmer, Ankleide und Pool · Grundstück 18 × 34,5 m</span></div>
+  <div class="brand"><strong>Doppelhaus · Version 2</strong><span>Gästezimmer, Ankleide und Pool · Grundstück 18 × 34,5 m</span></div>
+  <div class="seg" role="group" aria-label="Wohnfläche wählen">
+    <button type="button" id="size-150" data-size="150" aria-pressed="true">150 m²</button>
+    <button type="button" id="size-140" data-size="140" aria-pressed="false">140 m²</button>
+  </div>
   <div class="seg" role="group" aria-label="Variante wählen">
     <button type="button" id="var-a" data-var="A" aria-pressed="true">Variante A<small>6,0 × 16,2 m</small></button>
     <button type="button" id="var-b" data-var="B" aria-pressed="false">Variante B<small>5,7 × 17,1 m</small></button>
@@ -195,7 +203,7 @@ body.touch.walking.looked #lookhint{display:none}
     <div class="intro">
       <div>
         <h1>Grober Bauplan, Version 2</h1>
-        <p>Zwei spiegelgleiche Doppelhaushälften mit je rund 150 m², Walmdach, seitlichen Carports und Pool und Wellnessbereich im Garten von Haus 1. Im Obergeschoß gibt es ein kleines Gästezimmer und eine Ankleide. Die Maße sind Planungsannahmen für das Gespräch mit Planer und Bauamt, kein Einreichplan.</p>
+        <p>Zwei spiegelgleiche Doppelhaushälften, oben wählbar mit rund 150 oder 140 m² Wohnfläche, mit Walmdach, seitlichen Carports, Sauna im linken und Pool im rechten Garten. Im Obergeschoß gibt es ein kleines Gästezimmer und eine Ankleide. Die Maße sind Planungsannahmen für das Gespräch mit Planer und Bauamt, kein Einreichplan.</p>
       </div>
       <a class="cta" href="#rundgang">Haus in 3D betreten</a>
     </div>
@@ -254,7 +262,7 @@ body.touch.walking.looked #lookhint{display:none}
             <li>Die Küche liegt dahinter, offen zum Wohn- und Essbereich: 4 m lange Zeile an der Außenwand mit Spüle am Fenster, Insel mit Kochfeld, Hochschrankwand in Eiche an der Stiegenwand für Kühlschrank, Backofen und Vorräte.</li>
             <li>Die Tür in der Küchenwand führt in die Speis, einen Vorratsraum mit offenem Regal. Im Rundgang hängt ein Schild darüber.</li>
             <li>Gerade Stiege an der Trennwand mit 16 Stufen, darunter ein Abstellraum.</li>
-            <li>Das Haus ist länger als in Version 1. Der Zuwachs liegt im Wohn- und Essbereich und im Obergeschoß.</li>
+            <li>Die Hauslänge hängt von der gewählten Wohnfläche ab. Bei 140 m² werden vor allem der Wohn- und Essbereich und die Zimmer an der Gartenseite kürzer, der Garten wird länger.</li>
             <li>Kleines Gästezimmer im Obergeschoß an der Straßenseite, neben Kinderzimmer 1: Einzelbett, Nachttisch, Schrank und Kofferbank.</li>
             <li>Elternschlafzimmer an der Gartenseite mit eigener Ankleide: links ein geschlossener Schrank mit Türen, rechts ein offenes System mit Kleiderstangen, Fächern und Laden. Schiebetür und kleines Fenster.</li>
             <li>Möbel: Esstisch längs am Seitenfenster, Ecksofa an der Außenwand mit dem Rücken zum Essbereich, Fernseher an der Trennwand. Der Weg von der Küche zur Terrassentür bleibt frei.</li>
@@ -333,8 +341,10 @@ body.touch.walking.looked #lookhint{display:none}
    Grundstueckshaelfte: p = quer ab Aussengrenze (0..9), z = Tiefe ab Strasse.
    Haus 2 ist die Spiegelung von Haus 1. */
 const VARIANTS = {
-  A: { W: 6.0, D: 16.2, S: 3.0, hRoom: 2.50 },
-  B: { W: 5.7, D: 17.1, S: 3.3, hRoom: 2.60 }
+  A150: { shape: 'A', size: 150, W: 6.0, D: 16.2, S: 3.0, hRoom: 2.50 },
+  B150: { shape: 'B', size: 150, W: 5.7, D: 17.1, S: 3.3, hRoom: 2.60 },
+  A140: { shape: 'A', size: 140, W: 6.0, D: 15.3, S: 3.0, hRoom: 2.50, bathD: 2.3, schD: 4.8, anD: 1.8 },
+  B140: { shape: 'B', size: 140, W: 5.7, D: 16.1, S: 3.3, hRoom: 2.60 }
 };
 const PLOT_W = 18, PLOT_D = 34.5, FRONT = 5.0, CP_D = 5.5, ROOF_DEG = 32, OVH = 0.6;
 const r2 = n => Math.round(n * 100) / 100;
@@ -350,7 +360,8 @@ function makeModel(key) {
   const vW = r2(vA + 1.6), vSp = r2(CP_D - tI), vT = r2(vSp - 0.85 - tI), vK = CP_D, vL = 9.0, vKe = 9.5;
   const uSt = r2(uB - 1.0), uSw = r2(uSt - tI), vS0 = r2(vA + 4.0), vS1 = r2(vS0 + 15 * 0.27);
   // Obergeschoss
-  const uR = r2(uSw - 1.0 - tI), vBu = r2(vA + 2.9), vK1 = r2(vA + 4.0), vBad = r2(vK1 + tI + 2.5), vSch = r2(vB - 5.2 - tI), vAn = r2(vSch + tI + 2.0);
+  const uR = r2(uSw - 1.0 - tI), vBu = r2(vA + 2.9), vK1 = r2(vA + 4.0), vBad = r2(vK1 + tI + (V.bathD || 2.5)), vSch = r2(vB - (V.schD || 5.2) - tI), vAn = r2(vSch + tI + (V.anD || 2.0));
+  const anB = r2(Math.min(vSch + tI + 1.4, vAn - 0.5)), bigLiving = vB - vL >= 6.5;
   const HR = r2(FRONT + D), R = PLOT_D;
 
   const runs = [];
@@ -373,7 +384,7 @@ function makeModel(key) {
   // OG aussen
   run(1, 'u', 0, tO, 0, W - 0.02, true, [win(uA + 0.7, uA + 2.1, 0.9, 2.2), win(uB - 1.5, uB - 0.4, 0.9, 2.2)]);
   run(1, 'v', 0, tO, tO, D - tO, true, [win(1.6, 2.8, 0.9, 2.2), win(vK1 + tI + 0.9, vK1 + tI + 1.7, 1.3, 2.1, true),
-    win(vBad + tI + 0.9, vBad + tI + 2.5, 0.9, 2.2), win(vSch + tI + 0.6, vSch + tI + 1.4, 1.3, 2.1, true), win(vAn + tI + 0.9, vAn + tI + 2.3, 0.9, 2.2)]);
+    win(vBad + tI + 0.9, vBad + tI + 2.5, 0.9, 2.2), win(vSch + tI + 0.6, anB, 1.3, 2.1, true), win(vAn + tI + 0.9, vAn + tI + 2.3, 0.9, 2.2)]);
   run(1, 'u', D - tO, D, 0, W - 0.02, true, [win(uA + 0.9, uB - 0.9, 0.5, 2.25)]);
   run(1, 'v', W - 0.30, W - 0.02, tO, D - tO, true, []);
   // OG innen
@@ -384,7 +395,7 @@ function makeModel(key) {
   run(1, 'u', vBad, vBad + tI, uA, uR, false, []);
   run(1, 'u', vSch, vSch + tI, uA, uB, false, [door(dF, dF + 0.85, 'a', 1)]);
   run(1, 'u', vAn, vAn + tI, uA, uR + tI, false, []);
-  run(1, 'v', uR, uR + tI, vSch + tI, vAn, false, [door(vSch + tI + 0.6, vSch + tI + 1.4, 'a', -1, 'slide')]);
+  run(1, 'v', uR, uR + tI, vSch + tI, vAn, false, [door(vSch + tI + 0.6, anB, 'a', -1, 'slide')]);
 
   const rooms = [
     { f: 0, name: 'Vorraum', kind: 'tile', rects: [[uV, vA, uB, vS0], [uV, vS0, uSw, vSp]] },
@@ -393,7 +404,7 @@ function makeModel(key) {
     { f: 0, name: 'Technik / Waschen', short: 'Technik', kind: 'tile', rects: [[uA, vW + tI, uS, vT]] },
     { f: 0, name: 'Speis (Vorrat)', kind: 'tile', rects: [[uA, vT + tI, uS, vSp]], small: true, oneLine: true },
     { f: 0, name: 'Küche', kind: 'wood', rects: [[uA, vK, uSw, vKe]] },
-    { f: 0, name: 'Wohnen / Essen', kind: 'wood', rects: [[uA, vKe, uB, vB], [uSw, vS1 + 0.08, uB, vKe]], labV: r2(vL + 2.95) },
+    { f: 0, name: 'Wohnen / Essen', kind: 'wood', rects: [[uA, vKe, uB, vB], [uSw, vS1 + 0.08, uB, vKe]], labV: r2(vL + (bigLiving ? 2.95 : 2.42)) },
     { f: 0, name: 'Abstellraum unter der Stiege', short: 'Abst.', kind: 'none', rects: [[uSt, vS0 + 1.6, uB, vS1]], extra: true },
     { f: 1, name: 'Kinderzimmer 1', kind: 'wood', rects: [[uA, vA, uR, vK1]] },
     { f: 1, name: 'Gästezimmer', kind: 'wood', rects: [[uR + tI, vA, uB, vBu]] },
@@ -448,12 +459,12 @@ function makeModel(key) {
   fb(0, 'steel', tu - 0.04, t0 + mw + 0.08, tu - 0.012, t0 + 2 * mw - 0.08, 1.27, 1.29);
   fb(0, 'steel', tu - 0.03, t0 + 2 * mw + 0.075, tu, t0 + 2 * mw + 0.1, 0.9, 1.5);
   // Essen: Tisch laengs am Seitenfenster, Durchgang an der Trennwandseite frei
-  const tU = uA + 1.35, tV = vL + 0.6;
-  fb(0, 'wood', tU, tV, tU + 1.0, tV + 2.0, 0.71, 0.75, { plan: true });
-  fb(0, 'wood', tU + 0.06, tV + 0.06, tU + 0.94, tV + 1.94, 0, 0.71, { col: true, hide: true });
-  [[0.06, 0.06], [0.88, 0.06], [0.06, 1.88], [0.88, 1.88]].forEach(q => fb(0, 'wood', tU + q[0], tV + q[1], tU + q[0] + 0.06, tV + q[1] + 0.06, 0, 0.71));
-  for (let i = 0; i < 3; i++) {
-    const cv = tV + 0.2 + i * 0.58;
+  const tU = uA + 1.35, tV = vL + 0.6, tL = bigLiving ? 2.0 : 1.6, nCh = bigLiving ? 3 : 2;
+  fb(0, 'wood', tU, tV, tU + 1.0, tV + tL, 0.71, 0.75, { plan: true });
+  fb(0, 'wood', tU + 0.06, tV + 0.06, tU + 0.94, tV + tL - 0.06, 0, 0.71, { col: true, hide: true });
+  [[0.06, 0.06], [0.88, 0.06], [0.06, tL - 0.12], [0.88, tL - 0.12]].forEach(q => fb(0, 'wood', tU + q[0], tV + q[1], tU + q[0] + 0.06, tV + q[1] + 0.06, 0, 0.71));
+  for (let i = 0; i < nCh; i++) {
+    const cv = tV + (bigLiving ? 0.2 + i * 0.58 : 0.22 + i * 0.74);
     fb(0, 'chair', tU - 0.42, cv, tU, cv + 0.42, 0.40, 0.45, { plan: true });
     fb(0, 'chair', tU - 0.45, cv, tU - 0.41, cv + 0.42, 0.45, 0.88);
     fb(0, 'chair', tU + 1.0, cv, tU + 1.42, cv + 0.42, 0.40, 0.45, { plan: true });
@@ -461,11 +472,11 @@ function makeModel(key) {
     [[-0.42, 0], [-0.42, 0.38], [-0.04, 0], [-0.04, 0.38], [1.0, 0], [1.0, 0.38], [1.38, 0], [1.38, 0.38]].forEach(q =>
       fb(0, 'chair', tU + q[0], cv + q[1], tU + q[0] + 0.04, cv + q[1] + 0.04, 0, 0.40));
   }
-  fb(0, 'black', tU + 0.25, tV + 0.75, tU + 0.75, tV + 1.25, 1.55, 1.8);
-  fb(0, 'black', tU + 0.49, tV + 0.99, tU + 0.51, tV + 1.01, 1.8, hRoom);
+  fb(0, 'black', tU + 0.25, tV + tL / 2 - 0.25, tU + 0.75, tV + tL / 2 + 0.25, 1.55, 1.8);
+  fb(0, 'black', tU + 0.49, tV + tL / 2 - 0.01, tU + 0.51, tV + tL / 2 + 0.01, 1.8, hRoom);
   fb(0, 'woodLight', uB - 0.45, vL + 0.6, uB, vL + 2.4, 0, 0.8, CP);
   // Wohnen: Ecksofa an der Aussenwand mit Ruecken zum Essbereich, TV an der Trennwand
-  const s0 = r2(vB - 3.5);
+  const s0 = r2(vB - (bigLiving ? 3.5 : 3.2));
   fb(0, 'sofa', uA + 0.05, s0, uA + 1.0, s0 + 2.7, 0, 0.42, CP);
   fb(0, 'sofa', uA + 1.0, s0, uA + 2.6, s0 + 0.95, 0, 0.42, CP);
   fb(0, 'sofa', uA + 0.05, s0, uA + 0.27, s0 + 2.7, 0.42, 0.82);
@@ -621,14 +632,14 @@ function makeModel(key) {
   fb(1, 'rug', uA + 0.9, vK1 + tI + 0.85, uA + 1.6, vK1 + tI + 1.3, 0, 0.012);
   // Kinderzimmer 2: Schrank neben der Tuer, Schreibtisch am Fenster, Bett an der Rueckwand
   wardrobe(1, uA + 0.05, vBad + tI, uA + 1.7, 1, 2.1);
-  desk(1, uA, vBad + tI + 0.95, uA + 0.6, vBad + tI + 2.25); stool(1, uA + 0.7, vBad + tI + 1.38);
+  desk(1, uA, vBad + tI + 0.95, uA + 0.6, Math.min(vBad + tI + 2.25, vSch - 1.05)); stool(1, uA + 0.7, vBad + tI + 1.38);
   bed(1, uA + 0.02, vSch - 0.97, uA + 2.02, vSch - 0.02, uA + 0.09, vSch - 0.87, uA + 0.5, vSch - 0.12);
   fb(1, 'rug', uA + 1.0, vBad + tI + 0.9, uR - 0.3, vSch - 1.15, 0, 0.012);
   // Ankleide: Schraenke an beiden Laengswaenden, Bank am Fenster
   const Z0 = r2(vSch + tI);
   wardrobe(1, uA, Z0, uR, 1, 2.3);
   openWardrobe(1, uA, vAn, uR, -1);
-  fb(1, 'sofa', uA + 0.03, Z0 + 0.68, uA + 0.43, Z0 + 1.32, 0, 0.45, CP);
+  fb(1, 'sofa', uA + 0.03, Z0 + 0.66, uA + 0.43, Math.min(Z0 + 1.32, vAn - 0.6), 0, 0.45, CP);
   // Schlafzimmer: Bett an der Ankleidewand mit Blick zum Gartenfenster, Kommode an der Trennwand
   const uc = r2((uA + uR) / 2), bv = r2(vAn + tI);
   bed(1, uc - 0.9, bv, uc + 0.9, bv + 2.1, uc - 0.8, bv + 0.1, uc + 0.8, bv + 0.55);
@@ -672,7 +683,7 @@ function makeModel(key) {
 
   const hw = (PLOT_W - 2 * S + 2 * OVH) / 2, hRidge = r2(hw * Math.tan(ROOF_DEG * Math.PI / 180));
   return {
-    key, W, D, S, hRoom, tO, tI, slab, F0, F1, H, yEave, uA, uB, vA, vB, Wi, strip, uS, uV, uW, vW, vSp, vT, vK, vL,
+    key, shape: V.shape, size: V.size, W, D, S, hRoom, tO, tI, slab, F0, F1, H, yEave, uA, uB, vA, vB, Wi, strip, uS, uV, uW, vW, vSp, vT, vK, vL,
     uSt, uSw, vS0, vS1, uR, vK1, vBad, vSch, HR, R, hw, hRidge, yRidge: r2(yEave + 0.06 + hRidge),
     stair: { u0: uSt, u1: uB, v0: vS0, v1: vS1, n: 16, tread: 0.27 },
     vBu, vAn, vKe, runs, rooms, furn, cyl, plants, hatch, site
@@ -933,9 +944,10 @@ const Plan = (() => {
   }
   function note(M) {
     const need = M.yEave / 2, res = M.S - need;
-    return M.key === 'A'
-      ? `Variante A: Das Haus ist ${de(M.D)} m tief, damit es auf rund 150 m² kommt. Die Gebäudehöhe von ${de(M.yEave, 2)} m lässt nur ${de(res * 100, 0)} cm Reserve auf den nötigen Seitenabstand. Raumhöhe, Deckenstärke und Geländehöhe müssen genau so gebaut werden.`
-      : `Variante B: ${de(res * 100, 0)} cm Reserve beim Seitenabstand. Dafür ist das Haus ${de(M.D)} m tief, die Zimmer an der Außenwand im Obergeschoß sind nur ${de(M.uR - M.uA)} m breit und der Garten ist ${de(PLOT_D - M.HR)} m tief.`;
+    const wfl = Math.round(floorArea(M, 0) + floorArea(M, 1));
+    return M.shape === 'A'
+      ? `Variante A mit ${wfl} m²: Das Haus ist ${de(M.D)} m tief. Die Gebäudehöhe von ${de(M.yEave, 2)} m lässt nur ${de(res * 100, 0)} cm Reserve auf den nötigen Seitenabstand. Raumhöhe, Deckenstärke und Geländehöhe müssen genau so gebaut werden.${M.size === 140 ? ' Gegenüber 150 m² sind der Wohn- und Essbereich, Bad, Kinderzimmer 2, Ankleide und Schlafzimmer etwas kleiner.' : ''}`
+      : `Variante B mit ${wfl} m²: ${de(res * 100, 0)} cm Reserve beim Seitenabstand. Dafür ist das Haus ${de(M.D)} m tief, die Zimmer an der Außenwand im Obergeschoß sind nur ${de(M.uR - M.uA)} m breit und der Garten ist ${de(PLOT_D - M.HR)} m tief.${M.size === 140 ? ' Gegenüber 150 m² sind der Wohn- und Essbereich und Kinderzimmer 2 kleiner.' : ''}`;
   }
   function render(M) {
     const set = (id, html) => { const e = document.getElementById(id); if (e) e.innerHTML = html; };
@@ -1550,17 +1562,21 @@ const Walk = (() => {
 <script>
 'use strict';
 (function () {
-  let variant = 'A', walkInit = false, walkFailed = false;
-  try { const v = localStorage.getItem('doppelhaus-v2-variante'); if (v === 'A' || v === 'B') variant = v; } catch (_) { }
+  let shape = 'A', size = 150, walkInit = false, walkFailed = false;
+  try { const v = localStorage.getItem('doppelhaus-v2-form'); if (v === 'A' || v === 'B') shape = v; const g = localStorage.getItem('doppelhaus-v2-groesse'); if (g === '150' || g === '140') size = +g; } catch (_) { }
   const $ = id => document.getElementById(id);
   const coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+  const key = () => shape + size;
 
-  function markVariant() { for (const b of document.querySelectorAll('[data-var]')) b.setAttribute('aria-pressed', String(b.dataset.var === variant)); }
-  function renderPlan() { Plan.render(makeModel(variant)); markVariant(); }
-  function setVariant(v) {
-    if (v === variant) return;
-    variant = v; try { localStorage.setItem('doppelhaus-v2-variante', v); } catch (_) { }
-    renderPlan(); if (walkInit) Walk.setVariant(v);
+  function markVariant() {
+    for (const b of document.querySelectorAll('[data-var]')) { b.setAttribute('aria-pressed', String(b.dataset.var === shape)); const V = VARIANTS[b.dataset.var + size]; b.querySelector('small').textContent = `${de(V.W)} × ${de(V.D)} m`; }
+    for (const b of document.querySelectorAll('[data-size]')) b.setAttribute('aria-pressed', String(+b.dataset.size === size));
+  }
+  function renderPlan() { Plan.render(makeModel(key())); markVariant(); }
+  function setVariant(sh, sz) {
+    if (sh === shape && sz === size) return;
+    shape = sh; size = sz; try { localStorage.setItem('doppelhaus-v2-form', sh); localStorage.setItem('doppelhaus-v2-groesse', String(sz)); } catch (_) { }
+    renderPlan(); if (walkInit) Walk.setVariant(key());
   }
   function setMode(m) {
     Walk.setMode(m);
@@ -1575,7 +1591,7 @@ const Walk = (() => {
     $('tab-plan').toggleAttribute('aria-current', !walk); $('tab-walk').toggleAttribute('aria-current', walk);
     if (walk) {
       if (!walkInit && !walkFailed) {
-        try { Walk.init(variant); walkInit = true; setMode('walk'); }
+        try { Walk.init(key()); walkInit = true; setMode('walk'); }
         catch (e) { walkFailed = true; $('glerr').hidden = false; $('startov').hidden = true; $('glerr-text').textContent = (e && e.message ? e.message + ' ' : '') + 'Der Bauplan funktioniert weiterhin. Für den Rundgang bitte einen aktuellen Browser am Computer verwenden.'; }
       }
       if (walkInit) Walk.start();
@@ -1583,7 +1599,8 @@ const Walk = (() => {
   }
   function route() { show(location.hash === '#rundgang' ? 'walk' : 'plan'); }
 
-  for (const b of document.querySelectorAll('[data-var]')) b.addEventListener('click', () => setVariant(b.dataset.var));
+  for (const b of document.querySelectorAll('[data-var]')) b.addEventListener('click', () => setVariant(b.dataset.var, size));
+  for (const b of document.querySelectorAll('[data-size]')) b.addEventListener('click', () => setVariant(shape, +b.dataset.size));
   $('m-walk').addEventListener('click', () => setMode('walk'));
   $('m-over').addEventListener('click', () => { setMode('over'); $('startov').hidden = true; });
   for (const b of document.querySelectorAll('[data-go]')) b.addEventListener('click', () => { Walk.goTo(b.dataset.go); setMode('walk'); $('startov').hidden = true; $('jump').classList.remove('open'); $('jump-toggle').setAttribute('aria-expanded', 'false'); $('gl').focus(); });
