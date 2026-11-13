@@ -212,7 +212,7 @@ body.touch.walking.looked #lookhint{display:none}
             <li><b>Seitlich:</b> Carport direkt am Haus. Bei Haus 1 steht dahinter ein Geräteschuppen.</li>
             <li><b>Hinten:</b> Terrasse an jedem Haus, dazwischen ein Sichtschutz. Dahinter ist der Garten offen, damit man von der Sauna zum Pool kommt.</li>
             <li><b>Linke Seite:</b> Holzdeck am Gartenende mit Sauna, Cold Plunge, Gartendusche und zwei Liegen. Davor Rasen.</li>
-            <li><b>Rechte Seite:</b> Pool 3 × 7 m längs, 1 m von der hinteren Grundgrenze, mit Holzdeck und zwei Liegen. Daneben an der Außengrenze der zweite Geräteschuppen und zwei Hochbeete.</li>
+            <li><b>Rechte Seite:</b> Pool 7 × 3 m quer am Gartenende, 1 m von den Grundgrenzen, mit Holzdeck und zwei Liegen davor. An der Außengrenze stehen davor der zweite Geräteschuppen und zwei Hochbeete.</li>
           </ul>
         </div>
       </div>
@@ -258,7 +258,7 @@ body.touch.walking.looked #lookhint{display:none}
             <li>Walmdach mit 32°. Der Dachboden ist über eine Bodentreppe im Flur erreichbar.</li>
             <li>Trennwand zweischalig mit durchgehender Fuge bis ins Fundament.</li>
             <li>Carport 5,5 m lang, höchstens 3 m hoch, Steher an der Grundgrenze. Haus 2 bekommt ein eigenes Tor rechts.</li>
-            <li>Pool: 3 × 7 m, 1,5 m tief, rund 32 m³, mit Einstiegsstufen an der Hausseite. Die Pooltechnik kommt in den Geräteschuppen daneben.</li>
+            <li>Pool: 7 × 3 m quer, 1,5 m tief, rund 32 m³, mit Einstiegsstufen an der Seite zur Gartenmitte. Die Pooltechnik kommt in den Geräteschuppen davor.</li>
             <li>Sauna und Pool: Leerrohre für Starkstrom und Wasser vom Technikraum nach hinten gleich mitverlegen.</li>
           </ul>
         </div>
@@ -577,10 +577,10 @@ function makeModel(key) {
     deck1: [0.4, R - 5.0, 6.6, R - 0.3], sauna: [0.7, R - 3.3, 3.5, R - 0.5], plunge: [3.8, R - 2.6, 4.6, R - 0.9],
     loungers1: [[5.0, R - 4.7, 5.65, R - 2.9], [5.85, R - 4.7, 6.5, R - 2.9]],
     // Garten 2 (rechts), Weltkoordinaten x
-    pool: [11.6, R - 8.0, 14.6, R - 1.0], poolDepth: 1.5, deck2: [10.0, R - 8.6, 15.2, R - 0.4],
-    loungers2: [[10.45, R - 7.4, 11.1, R - 5.6], [10.45, R - 4.9, 11.1, R - 3.1]],
-    shed2: [15.8, R - 3.0, 17.6, R - 0.5], beds2: [[15.7, R - 5.0, 17.5, R - 3.8], [15.7, R - 6.8, 17.5, R - 5.6]],
-    trees: [{ x: 8.0, z: R - 2.3, r: 1.2 }, { x: 1.5, z: r2(HR + 6.0), r: 1.0 }, { x: 16.7, z: r2(HR + 1.6), r: 1.0 }],
+    pool: [10.0, R - 4.0, 17.0, R - 1.0], poolDepth: 1.5, deck2: [9.4, R - 7.2, 17.6, R - 0.4],
+    loungers2: [[11.0, R - 7.0, 11.65, R - 5.2], [11.9, R - 7.0, 12.55, R - 5.2]],
+    shed2: [15.8, R - 9.9, 17.6, R - 7.4], beds2: [[15.7, R - 11.4, 17.5, R - 10.2], [15.7, R - 12.9, 17.5, R - 11.7]],
+    trees: [{ x: 8.0, z: R - 2.3, r: 1.2 }, { x: 1.5, z: r2(HR + 6.0), r: 1.0 }, { x: 16.7, z: r2(HR - 1.8), r: 1.0 }],
     divEnd: r2(HR + 4.5),
     stones: []
   };
@@ -655,8 +655,8 @@ const Plan = (() => {
     o += `<line class="lead" x1="${c.px(s.plunge[2])}" y1="${c.pz(mid(s.plunge)[1] + 0.3)}" x2="${c.px(5.15)}" y2="${c.pz(s.plunge[3] - 0.5)}"/>`;
     for (const l of s.loungers1) o += R4('furn', l);
     o += c.text('lbl-xs', 5.6, M.HR + 5.4, 'Rasen');
-    // Garten 2: Pool laengs, Hochbeete, Geraeteschuppen
-    o += R4('deck', s.deck2) + R4('water', s.pool, 'rx="3"') + c.text('lbl-s', mid(s.pool)[0] - 0.25, mid(s.pool)[1], 'Pool', -90) + c.text('lbl-xs', mid(s.pool)[0] + 0.55, mid(s.pool)[1], '3,0 × 7,0 m', -90);
+    // Garten 2: Pool quer, Hochbeete, Geraeteschuppen
+    o += R4('deck', s.deck2) + R4('water', s.pool, 'rx="3"') + c.text2('lbl-s', 'lbl-xs', mid(s.pool)[0], mid(s.pool)[1], 'Pool', '7,0 × 3,0 m');
     for (const l of s.loungers2) o += R4('furn', l);
     o += R4('shed', s.shed2) + c.text('lbl-xs', mid(s.shed2)[0] + 0.2, mid(s.shed2)[1], 'Geräte', -90);
     for (const bd of s.beds2) o += R4('bed', bd);
@@ -821,12 +821,12 @@ const Plan = (() => {
       ['Grundstück', '18,0 × 34,5 m', '621 m²'],
       ['Häuser (2 ×)', `${de(M.W)} × ${de(M.D)} m`, `${de(house, 0)} m²`],
       ['Carports (2 ×)', `${de(M.S)} × ${de(CP_D)} m`, `${de(cp, 0)} m²`],
-      ['Geräteschuppen (2 ×)', '1,8 × 2,5 m, einer am Pool', `${de(sh, 0)} m²`],
+      ['Geräteschuppen (2 ×)', '1,8 × 2,5 m, einer vor dem Pooldeck', `${de(sh, 0)} m²`],
       ['Saunahaus', '2,8 × 2,8 m', `${de(sa, 0)} m²`],
       ['Überbaut gesamt', `${de(tot / 621 * 100, 0)} % des Grundstücks`, `${de(tot, 0)} m²`],
       ['Garten je Haus', `9,0 × ${de(PLOT_D - M.HR)} m`, `${de(9 * (PLOT_D - M.HR), 0)} m²`],
-      ['Pool (Garten 2)', `3,0 × 7,0 m längs, ${de(s.poolDepth)} m tief`, `21 m² · ${de(21 * s.poolDepth, 0)} m³`],
-      ['Pooldeck', '5,2 × 8,2 m rund um den Pool', `${de(A(s.deck2) - A(s.pool), 0)} m²`],
+      ['Pool (Garten 2)', `7,0 × 3,0 m quer, ${de(s.poolDepth)} m tief`, `21 m² · ${de(21 * s.poolDepth, 0)} m³`],
+      ['Pooldeck', '8,2 × 6,8 m rund um den Pool', `${de(A(s.deck2) - A(s.pool), 0)} m²`],
       ['Wellness-Deck (Garten 1)', '6,2 × 4,7 m mit Sauna und Cold Plunge', `${de(A(s.deck1), 0)} m²`],
       ['Cold Plunge', '0,8 × 1,7 m', 'neben der Sauna'],
       ['Rasen in Garten 1', 'zwischen Terrasse und Wellness-Deck', `≈ ${de(9 * (PLOT_D - M.HR) - A(s.terrace) - A(s.deck1), 0)} m²`]
@@ -1162,9 +1162,11 @@ const Walk = (() => {
     tub(s.plunge, 0.10, 0.88, 0.07, 'tubWood', 'water', 0.78);
     B('deckDark', [s.plunge[0] + 0.05, s.plunge[1] - 0.42, s.plunge[2] - 0.05, s.plunge[1] - 0.02], 0.10, 0.36);
     { const sx = s.plunge[2] + 0.2, sz = PLOT_D - 0.5; B('steel', [sx, sz, sx + 0.06, sz + 0.06], 0.10, 2.25); B('steel', [sx, sz - 0.3, sx + 0.06, sz], 2.19, 2.25); B('steel', [sx - 0.06, sz - 0.38, sx + 0.12, sz - 0.2], 2.13, 2.19); }
-    const lounger = l => { B('lounger', l, 0.36, 0.44); B('lounger', [l[0], l[1], l[2], l[1] + 0.06], 0.10, 0.36); B('lounger', [l[0], l[3] - 0.06, l[2], l[3]], 0.10, 0.36); B('lounger', [l[0], l[3] - 0.55, l[2], l[3] - 0.5], 0.44, 0.8); B('lounger', l, 0.10, 0.44, true, true); };
-    s.loungers1.forEach(lounger);
-    // ---- Garten 2: Pool laengs, Hochbeete, Geraeteschuppen ----
+    const lounger = (l, headFront) => { B('lounger', l, 0.36, 0.44); B('lounger', [l[0], l[1], l[2], l[1] + 0.06], 0.10, 0.36); B('lounger', [l[0], l[3] - 0.06, l[2], l[3]], 0.10, 0.36);
+      if (headFront) B('lounger', [l[0], l[1] + 0.5, l[2], l[1] + 0.55], 0.44, 0.8); else B('lounger', [l[0], l[3] - 0.55, l[2], l[3] - 0.5], 0.44, 0.8);
+      B('lounger', l, 0.10, 0.9, true, true); };
+    s.loungers1.forEach(l => lounger(l, false));
+    // ---- Garten 2: Pool quer am Gartenende, Hochbeete, Geraeteschuppen ----
     { const [a0, b0, a1, b1] = s.pool, d = s.poolDepth, w = 0.25, dk = s.deck2;
       B('deck', [dk[0], dk[1], dk[2], b0 - w], 0, 0.10); B('deck', [dk[0], b1 + w, dk[2], dk[3]], 0, 0.10);
       B('deck', [dk[0], b0 - w, a0 - w, b1 + w], 0, 0.10); B('deck', [a1 + w, b0 - w, dk[2], b1 + w], 0, 0.10);
@@ -1172,11 +1174,11 @@ const Walk = (() => {
       B('poolTile', [a0 - w, b0 - w, a1 + w, b0], -d - 0.2, 0.11); B('poolTile', [a0 - w, b1, a1 + w, b1 + w], -d - 0.2, 0.11);
       B('poolTile', [a0 - w, b0, a0, b1], -d - 0.2, 0.11); B('poolTile', [a1, b0, a1 + w, b1], -d - 0.2, 0.11);
       B('poolTile', [a0, b0, a1, b1], -d - 0.2, -d);
-      for (let i = 0; i < 4; i++) B('poolTile', [a0, b0 + i * 0.3, a0 + 1.3, b0 + (i + 1) * 0.3], -d, -0.25 - i * 0.3);
+      for (let i = 0; i < 4; i++) B('poolTile', [a0 + i * 0.3, b0, a0 + (i + 1) * 0.3, b0 + 1.3], -d, -0.25 - i * 0.3);
       B('waterPool', [a0, b0, a1, b1], -d, -0.02);
       B('poolTile', [a0, b0, a1, b1], -2, 1.3, true, true);
     }
-    s.loungers2.forEach(lounger);
+    s.loungers2.forEach(l => lounger(l, true));
     { const sh = s.shed2; B('shed', sh, 0, 2.2, true); B('roofFlat', [sh[0] - 0.1, sh[1] - 0.1, sh[2] + 0.1, sh[3] + 0.1], 2.2, 2.3); B('doorInt', [sh[0] - 0.02, sh[1] + 0.7, sh[0], sh[1] + 1.6], 0.05, 2.0); }
     for (const q of s.beds2) { B('tubWood', q, 0, 0.42, true); B('soil', [q[0] + 0.06, q[1] + 0.06, q[2] - 0.06, q[3] - 0.06], 0.42, 0.45);
       for (let i = 0; i < 5; i++) mesh(new THREE.IcosahedronGeometry(0.13, 0), i % 2 ? mats.leaf : mats.leaf2, 'base', q[0] + 0.25 + i * 0.33, 0.52, (q[1] + q[3]) / 2 + (i % 2 ? 0.2 : -0.2), false); }
@@ -1271,7 +1273,7 @@ const Walk = (() => {
     const inw = a => P.x >= a[0] && P.x <= a[2] && z >= a[1] && z <= a[3];
     if (inw(s.sauna)) return 'Sauna';
     if (inw(s.deck1)) return 'Wellness-Deck · Sauna und Cold Plunge';
-    if (inw(s.deck2)) return 'Pooldeck · Pool 3 × 7 m';
+    if (inw(s.deck2)) return 'Pooldeck · Pool 7 × 3 m';
     return z < M.HR ? `Seitenstreifen Haus ${h}` : `Garten Haus ${h}`;
   }
   function stepWalk(dt) {
@@ -1427,7 +1429,7 @@ const Walk = (() => {
       office: () => [...loc(M.uR + M.tI + 0.55, M.vBu - 0.45), M.F1, hh === 1 ? -0.45 : 0.45],
       bedroom: () => [...loc(M.uR + M.tI + 0.55, M.vSch + M.tI + 0.5), M.F1, Math.PI + (hh === 1 ? -0.5 : 0.5)],
       garden: () => [X(hh, 6.4), M.HR + 4.8, 0, Math.PI],
-      pool: () => [9.5, PLOT_D - 9.0, 0, Math.PI + 0.5],
+      pool: () => [10.2, PLOT_D - 8.6, 0, Math.PI + 0.42],
       sauna: () => [4.6, PLOT_D - 6.6, 0, Math.PI - 0.5]
     }[n] || (() => [7.6, -3.4, 0, Math.PI]);
     const q = T(); P.x = q[0]; P.z = q[1]; P.y = q[2]; P.yaw = q[3]; P.pitch = -0.03;
